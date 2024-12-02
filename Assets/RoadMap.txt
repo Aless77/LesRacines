@@ -1,0 +1,23 @@
+Etape 1 : ( Setup du projet ) Priorité #### TODO
+	- Génération d'un map procédurale ( A faire en 4ème )
+	- Ajout du chateau ou village #### TODO
+	- Joueur et déplacement ### Fait
+	- Monstre IA ( aggro sur joueur, animation déplacement ) ### Fait
+	- Ajout des armes #### TODO
+
+Etape 2 : ( Comabat ) Priorité
+	- Combat ( attaque joueur et monstre ) ### Monstre fait, joueur a faire
+	- Animation d'attaque ( joueur, monstre ) ### Monstre fait, joueur a faire
+	- Création de la pierre à défendre ( Peut être trouvé des effets autour de la pierre )
+	- Monstre attaque la pierre ( Gestion de l'aggro entre joueur et
+          la pierre ) ### Aggro sur le joueur fait, a faire sur la pierre
+
+Etape 3 : ( Audio ) Priorité
+	- bruit de déplacement du joueur
+	- Monstre pousse un crie tout les x temps 
+	- Bruit d'une attaque joueur et monstre 
+	- Bruit riviere 
+
+Etape 4 : ( Système de vague )
+	- Spawn aléatoire des monstres autour du chateau
+	- Différentre vague d'enemis
