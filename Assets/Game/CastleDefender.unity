@@ -2252,7 +2252,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   riverCollider: {fileID: 0}
   maxVolume: 1
-  maxDistance: 50
+  maxDistance: 20
   player: {fileID: 0}
 --- !u!82 &687394195
 AudioSource:
