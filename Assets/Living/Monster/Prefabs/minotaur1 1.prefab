@@ -1071,6 +1071,7 @@ GameObject:
   - component: {fileID: 5503481392809759616}
   - component: {fileID: 6621244145467399543}
   - component: {fileID: 7192023171927512274}
+  - component: {fileID: -8714374971165830912}
   m_Layer: 3
   m_Name: minotaur1 1
   m_TagString: Monster
@@ -1151,22 +1152,22 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 962eeece434db284892d35656e4e07b3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerTransform: {fileID: 0}
-  player: {fileID: 0}
   agent: {fileID: 3858770000644938170}
   animator: {fileID: 5174546548666144505}
   maxHealth: 100
   walkSpeed: 2
-  chaseSpeed: 4
-  detecttionRadius: 15
-  attackDamage: 10
-  attackRadius: 3
-  attackDelay: 1.542
   waitTimeMin: 3
   waitTimeMax: 5
   wanderingDistanceMin: 6
   wanderingDistanceMax: 8
   soundsManager: {fileID: 0}
+  playerTransform: {fileID: 0}
+  player: {fileID: 0}
+  chaseSpeed: 4
+  detecttionRadius: 15
+  attackDamage: 10
+  attackRadius: 3
+  attackDelay: 1.542
 --- !u!65 &6621244145467399543
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -1215,6 +1216,48 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!23 &-8714374971165830912
+MeshRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3283388092880867953}
+  m_Enabled: 1
+  m_CastShadows: 1
+  m_ReceiveShadows: 1
+  m_DynamicOccludee: 1
+  m_StaticShadowCaster: 0
+  m_MotionVectors: 1
+  m_LightProbeUsage: 1
+  m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 2
+  m_RayTraceProcedural: 0
+  m_RenderingLayerMask: 1
+  m_RendererPriority: 0
+  m_Materials:
+  - {fileID: 0}
+  m_StaticBatchInfo:
+    firstSubMesh: 0
+    subMeshCount: 0
+  m_StaticBatchRoot: {fileID: 0}
+  m_ProbeAnchor: {fileID: 0}
+  m_LightProbeVolumeOverride: {fileID: 0}
+  m_ScaleInLightmap: 1
+  m_ReceiveGI: 1
+  m_PreserveUVs: 0
+  m_IgnoreNormalsForChartDetection: 0
+  m_ImportantGI: 0
+  m_StitchLightmapSeams: 1
+  m_SelectedEditorRenderState: 3
+  m_MinimumChartSize: 4
+  m_AutoUVMaxDistance: 0.5
+  m_AutoUVMaxAngle: 89
+  m_LightmapParameters: {fileID: 0}
+  m_SortingLayerID: 0
+  m_SortingLayer: 0
+  m_SortingOrder: 0
+  m_AdditionalVertexStreams: {fileID: 0}
 --- !u!1 &3453436461917664738
 GameObject:
   m_ObjectHideFlags: 0
