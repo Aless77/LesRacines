@@ -54,7 +54,7 @@ public class EnemyAI : IA
         {
             ChasePlayer(distance); // l'ennemi poursuit le joueur
         }
-        else
+        else if (base.targetIsInArea(playerTransform))
         {
             PassOrNewDestination(); // On ne fait rien ou trouve une nouvelle destination
         }

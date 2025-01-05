@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.AI;
 
@@ -35,8 +36,14 @@ public class IA : MonoBehaviour
 
     [Header("Audio")]
     [SerializeField]
-
     private SoundsManager soundsManager;
+
+    [Header("Distance checker")]
+    [SerializeField]
+    public int stopDistance;
+
+    private Rigidbody rb;
+    private bool IAStopped = false;
 
     protected SoundsManager SoundsManager
     {
@@ -63,6 +70,12 @@ public class IA : MonoBehaviour
         // audioSource est un component de l'objet Main Camera qui est un enfant de l'objet Player faire une recherche en passant par l'objet Player
         soundsManager = GameObject.Find("SoundsManager").GetComponent<SoundsManager>();
         currentHealth = maxHealth;
+        rb = GetComponent<Rigidbody>();
+        if (stopDistance == 0)
+        {
+            stopDistance = 60;
+        }
+
     }
 
     public void GetNewDestination()
@@ -119,5 +132,40 @@ public class IA : MonoBehaviour
     public void ResetAudio()
     {
         soundsManager.ResetAmbienceSound(); // remettre le son de fond
+    }
+
+    public bool targetIsInArea(Transform target) // La fonction va être utilisé pour savoir si le joueur est dans la zone pour continuer la simulation de l'IA ou de la stopper
+    {
+        float distance = Vector3.Distance(target.position, transform.position); // distance entre l'objet cible et l'IA
+        Debug.Log("Distance : " + distance);
+        if (distance >= stopDistance && rb.isKinematic == false)
+        {
+            IAStopped = true;
+            agent.isStopped = true;
+
+            rb.isKinematic = true;
+
+
+            return false;
+        }
+        else if (distance < stopDistance && rb.isKinematic == true)
+        {
+            IAStopped = false;
+            agent.isStopped = false;
+
+            rb.isKinematic = false;
+            rb.velocity = Vector3.zero;
+            rb.angularVelocity = Vector3.zero;
+
+            return true;
+        }
+        else if (IAStopped)
+        {
+            return false;
+        }
+        else
+        {
+            return true;
+        }
     }
 }

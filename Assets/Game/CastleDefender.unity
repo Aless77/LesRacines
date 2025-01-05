@@ -590,6 +590,7 @@ MonoBehaviour:
   wanderingDistanceMin: 4
   wanderingDistanceMax: 6
   soundsManager: {fileID: 0}
+  stopDistance: 0
 --- !u!54 &203431723
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -1195,6 +1196,7 @@ MonoBehaviour:
   wanderingDistanceMin: 4
   wanderingDistanceMax: 6
   soundsManager: {fileID: 0}
+  stopDistance: 0
 --- !u!54 &318647068
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -1795,6 +1797,18 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4068281391595028, guid: 124fb29879dc61540b6b3c173eeafe39, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 108820319083214742, guid: 124fb29879dc61540b6b3c173eeafe39, type: 3}
+      propertyPath: m_Range
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 108820319083214742, guid: 124fb29879dc61540b6b3c173eeafe39, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 108820319083214742, guid: 124fb29879dc61540b6b3c173eeafe39, type: 3}
+      propertyPath: m_DrawHalo
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
@@ -4288,6 +4302,7 @@ MonoBehaviour:
   wanderingDistanceMin: 4
   wanderingDistanceMax: 6
   soundsManager: {fileID: 0}
+  stopDistance: 0
 --- !u!54 &1460626052
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -4790,6 +4805,7 @@ MonoBehaviour:
   wanderingDistanceMin: 4
   wanderingDistanceMax: 6
   soundsManager: {fileID: 0}
+  stopDistance: 0
 --- !u!54 &1500968534
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -6744,6 +6760,7 @@ MonoBehaviour:
   wanderingDistanceMin: 4
   wanderingDistanceMax: 6
   soundsManager: {fileID: 0}
+  stopDistance: 0
 --- !u!54 &2080075890
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -7802,6 +7819,7 @@ MonoBehaviour:
   wanderingDistanceMin: 4
   wanderingDistanceMax: 6
   soundsManager: {fileID: 0}
+  stopDistance: 0
 --- !u!54 &3888611275354242231
 Rigidbody:
   m_ObjectHideFlags: 0
