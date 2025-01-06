@@ -12,6 +12,7 @@ public class NPC_System : MonoBehaviour
     
     
     public GameObject Template_Dialogue;
+    public GameObject Template_Dialogue_Player;
     public GameObject canva;
     // Update is called once per frame
     void Start()
@@ -29,6 +30,7 @@ public class NPC_System : MonoBehaviour
             canva.SetActive(true);
             PlayerMovement.dialogue = true ; 
             NewDialogue("Hi");
+            NewDialoguePlayer("Salut"); 
             NewDialogue("My name is Lucy");
             NewDialogue("Four Minotaurs live near our village");
             NewDialogue("Find the four rocks and you will find them");
@@ -44,6 +46,14 @@ public class NPC_System : MonoBehaviour
         template_clone.transform.parent = canva.transform;
         template_clone.transform.GetChild(1).GetComponent<TextMeshProUGUI>().text = text;
     }
+
+    void NewDialoguePlayer(string text)
+    {
+        GameObject template_clone = Instantiate(Template_Dialogue_Player, Template_Dialogue_Player.transform);
+        template_clone.transform.parent = canva.transform;
+        template_clone.transform.GetChild(1).GetComponent<TextMeshProUGUI>().text = text;
+    }
+
     /*void OnTriggerEnter(collider other)
     {
         if(other.name == "player"){
