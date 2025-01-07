@@ -21,10 +21,9 @@ public class NPC_System : MonoBehaviour
         playerTransform = GameObject.Find("Player").transform;
         player = GameObject.Find("Player").GetComponent<Player>();
 
-        // Désactiver les templates de dialogue au départ
         Template_Dialogue.SetActive(false);
         Template_Dialogue_Player.SetActive(false);
-        canva.SetActive(false); // Assurez-vous que le canvas est désactivé au départ
+        canva.SetActive(false); 
 
     }
 
@@ -36,7 +35,6 @@ public class NPC_System : MonoBehaviour
             canva.SetActive(true);
             PlayerMovement.dialogue = true;
 
-            // Affiche le dialogue de l'NPC d'abord
             NewDialogue("Oh, étranger ! Qu’est-ce qui t’amène ici ?");
             NewDialoguePlayer("Je ne sais pas... Je me suis réveillé ici, dans la forêt.");
             NewDialogue("Comment ça, tu ne sais pas ? D’où viens-tu ?");
@@ -57,19 +55,6 @@ public class NPC_System : MonoBehaviour
             canva.transform.GetChild(1).gameObject.SetActive(true);
         }
     }
-
-    IEnumerator DisplayPlayerDialogue()
-    {
-        // Attendre un moment avant de commencer à afficher les dialogues du joueur
-        yield return new WaitForSeconds(1f); // Une petite pause avant le dialogue du joueur
-        yield return new WaitForSeconds(1f); // Une petite pause avant le prochain message du joueur
-        yield return new WaitForSeconds(1f); // Une petite pause avant le prochain message du joueur
-        yield return new WaitForSeconds(1f); // Une petite pause avant le prochain message du joueur
-        yield return new WaitForSeconds(1f); // Une petite pause avant le prochain message du joueur
-        yield return new WaitForSeconds(1f); // Une petite pause avant le prochain message du joueur
-        yield return new WaitForSeconds(1f); // Une petite pause avant le prochain message du joueur
-    }
-
 
     void NewDialogue(string text)
     {
