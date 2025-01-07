@@ -41,6 +41,7 @@ public class EnemyAI : IA
         // Get les components par rapport au nom de l'objet
         playerTransform = GameObject.Find("Player").transform;
         player = GameObject.Find("Player").GetComponent<Player>();
+        base.linkedObject = GameObject.Find("CrystalsGold");
         base.Start();
     }
 

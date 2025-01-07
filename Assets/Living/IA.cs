@@ -45,6 +45,10 @@ public class IA : MonoBehaviour
     private Rigidbody rb;
     private bool IAStopped = false;
 
+    [Header("Linked Object on Death")]
+    [SerializeField]
+    public GameObject linkedObject;
+
     protected SoundsManager SoundsManager
     {
         get { return soundsManager; }
@@ -120,6 +124,14 @@ public class IA : MonoBehaviour
         animator.SetTrigger("Die"); // lancer l'animation de mort
         agent.ResetPath();
         ResetAudio(); // remettre le son de fond
+
+        // Détruire l'objet lié si défini
+        if (linkedObject != null)
+        {
+            Destroy(linkedObject);
+            Debug.Log($"L'objet {linkedObject.name} a été détruit.");
+        }
+
         yield return new WaitForSeconds(delayBeforeDestroy); // attendre un temps avant de detruire l'ennemi
         Destroy(gameObject); // detruire l'ennemi
     }
@@ -137,7 +149,7 @@ public class IA : MonoBehaviour
     public bool targetIsInArea(Transform target) // La fonction va être utilisé pour savoir si le joueur est dans la zone pour continuer la simulation de l'IA ou de la stopper
     {
         float distance = Vector3.Distance(target.position, transform.position); // distance entre l'objet cible et l'IA
-        Debug.Log("Distance : " + distance);
+        //Debug.Log("Distance : " + distance);
         if (distance >= stopDistance && rb.isKinematic == false)
         {
             IAStopped = true;

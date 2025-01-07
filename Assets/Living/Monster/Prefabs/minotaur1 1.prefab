@@ -1162,6 +1162,7 @@ MonoBehaviour:
   wanderingDistanceMax: 8
   soundsManager: {fileID: 0}
   stopDistance: 50
+  linkedObject: {fileID: 0}
   playerTransform: {fileID: 0}
   player: {fileID: 0}
   chaseSpeed: 4
