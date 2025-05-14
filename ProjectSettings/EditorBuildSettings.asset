@@ -11,4 +11,6 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Game/CastleDefender.unity
     guid: c732593fe76e5a84197f9cd13963f706
-  m_configObjects: {}
+  m_configObjects:
+    com.unity.xr.management.loader_settings: {fileID: 11400000, guid: 9e55292fc74a2d4498c2412cd64a3a53, type: 2}
+    com.unity.xr.openxr.settings4: {fileID: 11400000, guid: f3d4771def002ca4397fac84f9c57e07, type: 2}
