@@ -63,10 +63,10 @@ public class PlayerMovement : MonoBehaviour
         {
             velocity.y = Mathf.Sqrt(jumpHeight * -2f * gravity);
         }*/
-        if ((Input.GetKey("space")) && isGrounded)
-        {
-            velocity.y = Mathf.Sqrt(jumpHeight * -2f * gravity);
-        }
+        // if ((Input.GetKey("space")) && isGrounded)
+        // {
+        //     velocity.y = Mathf.Sqrt(jumpHeight * -2f * gravity);
+        // }
         
         velocity.y += gravity * Time.deltaTime;
 
