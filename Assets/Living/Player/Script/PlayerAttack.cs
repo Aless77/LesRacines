@@ -23,6 +23,8 @@ public class PlayerAttack : MonoBehaviour
     [SerializeField]
     LayerMask layerMask;
 
+    public float AttackDamage => attackDamage;
+
 
     // Start is called before the first frame update
     void Start()
@@ -36,17 +38,17 @@ public class PlayerAttack : MonoBehaviour
         // Afficher le rayon de l'attaque dans la game view
 
 
-        Debug.DrawRay(mouseLook.transform.position, mouseLook.transform.forward * attackRange, Color.red);
+        //Debug.DrawRay(mouseLook.transform.position, mouseLook.transform.forward * attackRange, Color.red);
         
 
         // get l'animation en cours 
-        AnimatorStateInfo stateInfo = animator.GetCurrentAnimatorStateInfo(0);
-        if (Input.GetMouseButtonDown(0) && !isAttacking && !stateInfo.IsTag("PlayerAttack"))
-        {
-            isAttacking = true;
-            animator.SetTrigger("Attack");
-            Attack();
-        }
+        //AnimatorStateInfo stateInfo = animator.GetCurrentAnimatorStateInfo(0);
+        //if (Input.GetMouseButtonDown(0) && !isAttacking && !stateInfo.IsTag("PlayerAttack"))
+        //{
+        //    isAttacking = true;
+        //    animator.SetTrigger("Attack");
+        //    Attack();
+        //}
     }
 
     void Attack()
@@ -66,7 +68,7 @@ public class PlayerAttack : MonoBehaviour
 
     public void AttackFinish() // Fonction appelée à la fin de l'animation d'attaque à l'aide d'un animation event
     {
-        isAttacking = false;
-        animator.ResetTrigger("Attack");
+        //isAttacking = false;
+        //animator.ResetTrigger("Attack");
     }
 }
