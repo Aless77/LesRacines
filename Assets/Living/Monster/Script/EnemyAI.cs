@@ -36,10 +36,11 @@ public class EnemyAI : IA
 
 
     // Start is called before the first frame update
-    void Start()
+    new void Start()
     {
         // Get les components par rapport au nom de l'objet
         playerTransform = GameObject.Find("Player").transform;
+        Debug.Log(playerTransform);
         player = GameObject.Find("Player").GetComponent<Player>();
         base.linkedObject = GameObject.Find("CrystalsGold");
         base.Start();
@@ -51,6 +52,7 @@ public class EnemyAI : IA
         if (IsDead)  {return;} // si l'ennemi est mort, on ne fait rien
 
         float distance = Vector3.Distance(playerTransform.position, transform.position); // distance entre le joueur et l'ennemi
+        Debug.Log("Distance : " + distance); // afficher la distance entre le joueur et l'ennemi
         if (distance < detecttionRadius) // si le joueur est dans le rayon de detection
         {
             ChasePlayer(distance); // l'ennemi poursuit le joueur
