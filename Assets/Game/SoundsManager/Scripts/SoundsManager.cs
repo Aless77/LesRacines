@@ -19,8 +19,9 @@ public class SoundsManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        AudioSource audioSource1 = GameObject.Find("Player/XR Origin/Camera Offset/Main Camera").GetComponent<AudioSource>();
+        AudioSource audioSource1 = GameObject.Find("Player/Camera Offset/Main Camera").GetComponent<AudioSource>();
         audioSource = audioSource1;
+        Debug.Log("AudioSource trouvé : " + audioSource.name); // Debug pour vérifier que l'AudioSource est bien trouvé
         ambiantAudio = Resources.Load<AudioClip>("Sounds/Ambient 7");
         fightAudio = Resources.Load<AudioClip>("Sounds/Action 4 (Loop)");
      

@@ -52,7 +52,10 @@ public class EnemyAI : IA
         if (IsDead)  {return;} // si l'ennemi est mort, on ne fait rien
 
         float distance = Vector3.Distance(playerTransform.position, transform.position); // distance entre le joueur et l'ennemi
-        Debug.Log("Distance : " + distance); // afficher la distance entre le joueur et l'ennemi
+        //Debug.Log("Distance : " + distance); // afficher la distance entre le joueur et l'ennemi
+        // Draw la posistion du joureur et de l'ennemi dans la game view
+        Debug.DrawLine(playerTransform.position, transform.position, Color.red);
+
         if (distance < detecttionRadius) // si le joueur est dans le rayon de detection
         {
             ChasePlayer(distance); // l'ennemi poursuit le joueur
@@ -116,10 +119,12 @@ public class EnemyAI : IA
 
     private void OnDrawGizmos() // dessine un cercle rouge autour de l'ennemi pour visualiser le rayon de detection, non visible dans le jeu
     {
+        /*
         Gizmos.color = Color.yellow;
         Gizmos.DrawWireSphere(transform.position, detecttionRadius);
 
         Gizmos.color = Color.red;
         Gizmos.DrawWireSphere(transform.position, attackRadius);
+        */
     }
 }
