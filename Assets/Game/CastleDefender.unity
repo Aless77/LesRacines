@@ -1008,8 +1008,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d24c61fdd3d3b2c4db43f4602d3ac8c3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+<<<<<<< Updated upstream
   uiImage: {fileID: 2030918934}
   interactionKey: 101
+=======
+  uiImage: {fileID: 1126632943}
+  interactionKey: 105
+>>>>>>> Stashed changes
 --- !u!114 &301243347
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3629,7 +3634,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4135435275768504593, guid: dd40faac83a515a4a907caa60461ca3c, type: 3}
       propertyPath: m_LocalPosition.z
+<<<<<<< Updated upstream
       value: 0.0620203
+=======
+      value: 2.95
+>>>>>>> Stashed changes
       objectReference: {fileID: 0}
     - target: {fileID: 4135435275768504593, guid: dd40faac83a515a4a907caa60461ca3c, type: 3}
       propertyPath: m_LocalRotation.w
@@ -4665,6 +4674,11 @@ Transform:
   - {fileID: 1382820031}
   m_Father: {fileID: 517216197}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1126632943 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 3677838914221793032, guid: 4a2285ca33cb72a43b18bb9fe486aed9, type: 3}
+  m_PrefabInstance: {fileID: 2030918933}
+  m_PrefabAsset: {fileID: 0}
 --- !u!43 &1126906344
 Mesh:
   m_ObjectHideFlags: 0
