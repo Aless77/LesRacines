@@ -1,115 +1,75 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.XR;
 
 public class PlayerMovement : MonoBehaviour
 {
-    [Header("XR Settings")]
-    public XRNode moveSource = XRNode.LeftHand;   // joystick pour bouger
-    public XRNode actionSource = XRNode.RightHand;  // boutons A/B
+    public CharacterController controller;
 
-    [Header("Speeds")]
-    public float walkSpeed = 3f;
-    public float sprintMultiplier = 2f;
-
-    [Header("Jump & Crouch")]
+    public float speed = 5;
+    public float gravity = -9.18f;
     public float jumpHeight = 1.5f;
-    public float crouchHeight = 0.9f;              
-    private float originalHeight;
-    private Vector3 originalCenter;
 
-    [Header("Gravity")]
-    public float gravity = -9.81f;
+    public Transform groundCheck;
+    public float groundDistance = 0.4f;
+    public LayerMask groundMask;
 
-    [Header("Footsteps")]
+    Vector3 velocity;
+    bool isGrounded;
+    
     public AudioSource audioSource;
-    public float footstepInterval = 0.5f;
-
-    // --- états internes
-    private CharacterController _cc;
-    private Vector2 _moveAxis;
-    private bool _isSprinting;
-    private bool _isCrouching;
-    private bool _jumpPressed;
-    private float _verticalVelocity;
-    private float _footstepTimer;
+    private float timerFootStep = 0;
     static public bool dialogue = false ;
-
-    void Start()
-    {
-        _cc = GetComponent<CharacterController>();
-        // mémorise la configuration capsule d’origine
-        originalHeight = _cc.height;
-        originalCenter = _cc.center;
-    }
 
     void Update()
     {
-        // 1) mouvement & sprint
-        var mvDev = InputDevices.GetDeviceAtXRNode(moveSource);
-        mvDev.TryGetFeatureValue(CommonUsages.primary2DAxis, out _moveAxis);
-        mvDev.TryGetFeatureValue(CommonUsages.primary2DAxisClick, out _isSprinting);
 
-        // 2) actions (A pour crouch, B pour jump)
-        var actDev = InputDevices.GetDeviceAtXRNode(actionSource);
-        actDev.TryGetFeatureValue(CommonUsages.primaryButton, out _isCrouching);
-        actDev.TryGetFeatureValue(CommonUsages.secondaryButton, out _jumpPressed);
-
-        // 3) ajuste la capsule pour le crouch
-        if (_isCrouching)
+    
+        //isGrounded = Physics.CheckSphere(groundCheck.position, groundDistance, groundMask);
+        isGrounded = controller.isGrounded;
+        
+        if (isGrounded && velocity.y < 0)
         {
-            _cc.height = crouchHeight;
-            _cc.center = new Vector3(0, crouchHeight / 2f, 0);
+            velocity.y = -2f;
+        }
+
+        if (Input.GetKey(KeyCode.LeftShift) && isGrounded)
+        {
+            speed = 10;
         }
         else
         {
-            _cc.height = originalHeight;
-            _cc.center = originalCenter;
+            speed = 5;
         }
-    }
 
-    void FixedUpdate()
-    {
-        bool isGrounded = _cc.isGrounded;
-        if (isGrounded && _verticalVelocity < 0f)
-            _verticalVelocity = -2f;  // petite force pour rester collé
+        float x = Input.GetAxis("Horizontal");
+        float z = Input.GetAxis("Vertical");
 
-        // Jump
-        if (_jumpPressed && isGrounded)
-            _verticalVelocity = Mathf.Sqrt(jumpHeight * -2f * gravity);
+        Vector3 move = transform.right * x + transform.forward * z;
 
-        // Mouvement horizontal
-        float speed = walkSpeed * (_isSprinting ? sprintMultiplier : 1f);
+        controller.Move(move * speed * Time.deltaTime);
 
-        Vector3 fwd = Camera.main.transform.forward;
-        fwd.y = 0; fwd.Normalize();
-        Vector3 right = Camera.main.transform.right;
-        right.y = 0; right.Normalize();
-
-        Vector3 move = (fwd * _moveAxis.y + right * _moveAxis.x) * speed;
-
-        // Gravité
-        _verticalVelocity += gravity * Time.fixedDeltaTime;
-        Vector3 gravMove = Vector3.up * _verticalVelocity;
-
-        // Pas réalistes
-        if (isGrounded && move.magnitude > 0.1f)
+        if (isGrounded && (Mathf.Abs(x) > 0.1 || Mathf.Abs(z) > 0.1))
         {
-            _footstepTimer += Time.fixedDeltaTime;
-            if (_footstepTimer >= footstepInterval)
+            if (timerFootStep >= 0.5f)
             {
-                audioSource.Play();
-                _footstepTimer = 0f;
+                audioSource.Play(); // Joue le son de pas
+                timerFootStep = 0f; // Réinitialise le compteur de temps
             }
         }
-        else
-        {
-            // reset timer quand on s’arrête / en l’air
-            _footstepTimer = footstepInterval;
-        }
+        timerFootStep += Time.deltaTime;
 
-        // Applique le déplacement
-        _cc.Move((move + gravMove) * Time.fixedDeltaTime);
+        /*if (Input.GetButtonDown("Jump") && isGrounded)
+        {
+            velocity.y = Mathf.Sqrt(jumpHeight * -2f * gravity);
+        }*/
+        if ((Input.GetKey("space")) && isGrounded)
+        {
+            velocity.y = Mathf.Sqrt(jumpHeight * -2f * gravity);
+        }
+        
+        velocity.y += gravity * Time.deltaTime;
+
+        controller.Move(velocity * Time.deltaTime);
     }
 }

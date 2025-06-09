@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
+using UnityEngine.XR;
 public class NPC_System : MonoBehaviour
 {
     [SerializeField]
@@ -28,33 +29,60 @@ public class NPC_System : MonoBehaviour
     }
 
     void Update()
-    {
-        float distance = Vector3.Distance(playerTransform.position, transform.position); // distance entre le joueur et l'ennemi
-        if (distance < 4 && Input.GetKeyDown(KeyCode.F) && !PlayerMovement.dialogue) // si le joueur est dans le rayon de detection
-        {
-            canva.SetActive(true);
-            PlayerMovement.dialogue = true;
+{
+    float distance = Vector3.Distance(playerTransform.position, transform.position);
 
-            NewDialogue("Oh, étranger ! Qu’est-ce qui t’amène ici ?");
-            NewDialoguePlayer("Je ne sais pas... Je me suis réveillé ici, dans la forêt.");
-            NewDialogue("Comment ça, tu ne sais pas ? D’où viens-tu ?");
-            NewDialoguePlayer("Eh bien... Je ne sais pas... Je ne me souviens de rien.");
-            NewDialogue("Hmmm... Intéressant. Je pensais que ce n’était qu’une légende, mais... tu es peut-être un Enfant Perdu de Vecta.");
-            NewDialoguePlayer("Un Enfant Perdu de quoi ? Qu’est-ce que c’est ?");
-            NewDialogue("Les Enfants Perdus de Vecta... On dit qu’ils viennent d’un autre monde. Le Dieu Vecta les envoie ici pour une raison mystérieuse, connue de lui seul.");
-            NewDialogue("Tu es le premier que je rencontre... Mais dis-moi, te souviens-tu de quelque chose ? Ton nom, peut-être ?");
-            NewDialoguePlayer("Mon nom... Je m’appelle... Non... Je ne m’en souviens pas non plus.");
-            NewDialogue("Étrange... Cela confirme peut-être que tu es vraiment un Enfant Perdu de Vecta.");
-            NewDialogue("Écoute, je ne sais pas si cela pourra t’aider, mais une vieille légende parle d’un endroit dans cette forêt... La Colline des Souvenirs.");
-            NewDialoguePlayer("La Colline des Souvenirs ?");
-            NewDialogue("Oui, il paraît qu’au sommet se trouve une pierre magique. On raconte qu’elle révèle la vérité sur le passé de ceux qui la touchent.");
-            NewDialoguePlayer("Une pierre magique... Elle pourrait m’aider à retrouver la mémoire ?");
-            NewDialogue("C’est ce que dit la légende. Mais attention, cet endroit est dangereux. Personne n’y est allé depuis des années. On murmure qu’un monstre terrible y vit. Ceux qui ont tenté de gravir la colline ne sont jamais revenus.");
-            NewDialoguePlayer("Je comprends le danger, mais je ne peux pas tourner le dos à mon passé. C’est mon histoire, mes racines, ce qui me définit. Je dois y aller.");
-            NewDialogue("Alors, fais attention, étranger. La forêt est remplie de dangers. Sois prudent et... que Vecta veille sur toi. Bonne chance.");
-            canva.transform.GetChild(1).gameObject.SetActive(true);
+    // VÃ©rifie si le joueur est proche et appuie sur la touche B de la manette droite
+    bool isBPressed = false;
+    InputDevice rightHand = InputDevices.GetDeviceAtXRNode(XRNode.RightHand);
+    if (rightHand.TryGetFeatureValue(CommonUsages.secondaryButton, out bool buttonValue))
+    {
+        isBPressed = buttonValue;
+    }
+
+    if (distance < 4 && isBPressed && !PlayerMovement.dialogue)
+    {
+        StartDialogue();
+    }
+}
+
+    void StartDialogue()
+    {
+        ClearOldDialogues(); // Supprime les anciens dialogues sâ€™il y en avait
+
+        canva.SetActive(true);
+        PlayerMovement.dialogue = true;
+
+        NewDialogue("Oh, Ã©tranger ! Quâ€™est-ce qui tâ€™amÃ¨ne ici ?");
+        NewDialoguePlayer("Je ne sais pas... Je me suis rÃ©veillÃ© ici, dans la forÃªt.");
+        NewDialogue("Comment Ã§a, tu ne sais pas ? Dâ€™oÃ¹ viens-tu ?");
+        NewDialoguePlayer("Eh bien... Je ne sais pas... Je ne me souviens de rien.");
+        NewDialogue("Hmmm... IntÃ©ressant. Je pensais que ce nâ€™Ã©tait quâ€™une lÃ©gende, mais... tu es peut-Ãªtre un Enfant Perdu de Vecta.");
+        NewDialoguePlayer("Un Enfant Perdu de quoi ? Quâ€™est-ce que câ€™est ?");
+        NewDialogue("Les Enfants Perdus de Vecta... On dit quâ€™ils viennent dâ€™un autre monde. Le Dieu Vecta les envoie ici pour une raison mystÃ©rieuse, connue de lui seul.");
+        NewDialogue("Tu es le premier que je rencontre... Mais dis-moi, te souviens-tu de quelque chose ? Ton nom, peut-Ãªtre ?");
+        NewDialoguePlayer("Mon nom... Je mâ€™appelle... Non... Je ne mâ€™en souviens pas non plus.");
+        NewDialogue("Ã‰trange... Cela confirme peut-Ãªtre que tu es vraiment un Enfant Perdu de Vecta.");
+        NewDialogue("Ã‰coute, je ne sais pas si cela pourra tâ€™aider, mais une vieille lÃ©gende parle dâ€™un endroit dans cette forÃªt... La Colline des Souvenirs.");
+        NewDialoguePlayer("La Colline des Souvenirs ?");
+        NewDialogue("Oui, il paraÃ®t quâ€™au sommet se trouve une pierre magique. On raconte quâ€™elle rÃ©vÃ¨le la vÃ©ritÃ© sur le passÃ© de ceux qui la touchent.");
+        NewDialoguePlayer("Une pierre magique... Elle pourrait mâ€™aider Ã  retrouver la mÃ©moire ?");
+        NewDialogue("Câ€™est ce que dit la lÃ©gende. Mais attention, cet endroit est dangereux. Personne nâ€™y est allÃ© depuis des annÃ©es. On murmure quâ€™un monstre terrible y vit. Ceux qui ont tentÃ© de gravir la colline ne sont jamais revenus.");
+        NewDialoguePlayer("Je comprends le danger, mais je ne peux pas tourner le dos Ã  mon passÃ©. Câ€™est mon histoire, mes racines, ce qui me dÃ©finit. Je dois y aller.");
+        NewDialogue("Alors, fais attention, Ã©tranger. La forÃªt est remplie de dangers. Sois prudent et... que Vecta veille sur toi. Bonne chance.");
+
+        // Active le dialogue panel
+        canva.transform.GetChild(1).gameObject.SetActive(true);
+    }
+
+    void ClearOldDialogues()
+    {
+        for (int i = 2; i < canva.transform.childCount; i++)
+        {
+            Destroy(canva.transform.GetChild(i).gameObject);
         }
     }
+
 
     void NewDialogue(string text)
     {

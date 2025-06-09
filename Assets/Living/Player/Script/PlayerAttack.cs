@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class PlayerAttack : MonoBehaviour
 {
-    [Header("Références")]
+    [Header("Rï¿½fï¿½rences")]
     [SerializeField]
     private MouseLook mouseLook;
     [SerializeField]
@@ -18,12 +18,10 @@ public class PlayerAttack : MonoBehaviour
     private float attackRange;
 
     [SerializeField] 
-    private float attackDamage;
+    public float attackDamage;
 
     [SerializeField]
     LayerMask layerMask;
-
-    public float AttackDamage => attackDamage;
 
 
     // Start is called before the first frame update
@@ -38,22 +36,22 @@ public class PlayerAttack : MonoBehaviour
         // Afficher le rayon de l'attaque dans la game view
 
 
-        //Debug.DrawRay(mouseLook.transform.position, mouseLook.transform.forward * attackRange, Color.red);
+        Debug.DrawRay(mouseLook.transform.position, mouseLook.transform.forward * attackRange, Color.red);
         
 
         // get l'animation en cours 
-        //AnimatorStateInfo stateInfo = animator.GetCurrentAnimatorStateInfo(0);
-        //if (Input.GetMouseButtonDown(0) && !isAttacking && !stateInfo.IsTag("PlayerAttack"))
-        //{
-        //    isAttacking = true;
-        //    animator.SetTrigger("Attack");
-        //    Attack();
-        //}
+        AnimatorStateInfo stateInfo = animator.GetCurrentAnimatorStateInfo(0);
+        if (Input.GetMouseButtonDown(0) && !isAttacking && !stateInfo.IsTag("PlayerAttack"))
+        {
+            isAttacking = true;
+            animator.SetTrigger("Attack");
+            Attack();
+        }
     }
 
     void Attack()
     {
-        RaycastHit hit; // Variable pour stocker les informations de l'objet touché par le RayCast
+        RaycastHit hit; // Variable pour stocker les informations de l'objet touchï¿½ par le RayCast
         if (Physics.Raycast(mouseLook.transform.position, mouseLook.transform.TransformDirection(Vector3.forward), out hit, attackRange, layerMask)) // Le RayCast est en fonction de la direction ou regarde le joueur
         {
             Debug.Log("Hit : " + hit.transform.name); 
@@ -66,9 +64,9 @@ public class PlayerAttack : MonoBehaviour
         }
     }   
 
-    public void AttackFinish() // Fonction appelée à la fin de l'animation d'attaque à l'aide d'un animation event
+    public void AttackFinish() // Fonction appelï¿½e ï¿½ la fin de l'animation d'attaque ï¿½ l'aide d'un animation event
     {
-        //isAttacking = false;
-        //animator.ResetTrigger("Attack");
+        isAttacking = false;
+        animator.ResetTrigger("Attack");
     }
 }
