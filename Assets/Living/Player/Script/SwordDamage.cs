@@ -4,46 +4,46 @@ using UnityEngine;
 [RequireComponent(typeof(Collider))]
 public class SwordDamage : MonoBehaviour
 {
-    [Tooltip("Temps minimal entre deux coups sur la même cible (en secondes)")]
+    [Tooltip("Temps minimal entre deux coups sur la mï¿½me cible (en secondes)")]
     public float cooldownPerTarget = 1.5f;
 
-    private PlayerAttack _playerAttack;
+    public PlayerAttack _playerAttack;
     private Dictionary<EnemyAI, float> _lastHitTime = new Dictionary<EnemyAI, float>();
 
     void Start()
     {
-        // Récupère l’instance PlayerAttack via le tag
+        // Rï¿½cupï¿½re lï¿½instance PlayerAttack via le tag
         var playerGO = GameObject.FindWithTag("Player");
         if (playerGO == null)
-            Debug.LogError("SwordDamage: aucun GameObject taggé 'Player' trouvé.");
+            Debug.LogError("SwordDamage: aucun GameObject taggï¿½ 'Player' trouvï¿½.");
         else
             _playerAttack = playerGO.GetComponent<PlayerAttack>();
 
-        // Vérifie qu’on est bien sur un trigger
+        // Vï¿½rifie quï¿½on est bien sur un trigger
         var col = GetComponent<Collider>();
         if (!col.isTrigger)
-            Debug.LogWarning("SwordDamage: ce collider devrait être en trigger pour la détection de dégâts.");
+            Debug.LogWarning("SwordDamage: ce collider devrait ï¿½tre en trigger pour la dï¿½tection de dï¿½gï¿½ts.");
     }
 
     void OnTriggerStay(Collider other)
     {
         Debug.Log("SwordDamage: OnTriggerStay " + other.name);
-        // Ne réagit qu’aux monstres
+        // Ne rï¿½agit quï¿½aux monstres
         if (!other.CompareTag("Monster")) return;
         if (!(other.GetComponent<EnemyAI>() is EnemyAI enemy)) return;
 
-        Debug.Log("SwordDamage: " + enemy.name + " touché !");
-        // Vérifie le cooldown
+        Debug.Log("SwordDamage: " + enemy.name + " touchï¿½ !");
+        // Vï¿½rifie le cooldown
         _lastHitTime.TryGetValue(enemy, out float lastTime);
         if (Time.time - lastTime < cooldownPerTarget) return;
 
-        // Récupère les dégâts depuis PlayerAttack
+        // Rï¿½cupï¿½re les dï¿½gï¿½ts depuis PlayerAttack
         float dmg = _playerAttack != null
-                    ? _playerAttack.AttackDamage
+                    ? _playerAttack.attackDamage
                     : 0f;
 
-        // Inflige les dégâts et mémorise le timestamp
+        // Inflige les dï¿½gï¿½ts et mï¿½morise le timestamp
         enemy.TakeDamage(dmg);
         _lastHitTime[enemy] = Time.time;
-    }
+    } 
 }
